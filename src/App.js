@@ -1,22 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import MovieList from './components/MovieList';
+
 
 function App() {
+  
+  
+  const [movies, setMovies] = useState([ ]);
+  
+  {/* function to request URL and convert api key into Json format */}
+  const getMovieRequest = async () =>{
+    const url = "http://www.omdbapi.com/?i=star wars&apikey=263d22d8"
+    const response = await fetch(url);
+    const responseJson = await response.json();
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className='container-fluid movie-app'>
+          <div className='row'>
+            <MovieList movies = {movies}/>
+          </div>
+        </div>
+
       </header>
     </div>
   );
